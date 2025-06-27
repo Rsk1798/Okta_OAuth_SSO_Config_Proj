@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36221.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okta_OAuth_Config_Proj", "Okta_OAuth_Config_Proj.csproj", "{08D7A8AF-3A75-4A81-9D8F-CFDEC6D46AFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08D7A8AF-3A75-4A81-9D8F-CFDEC6D46AFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08D7A8AF-3A75-4A81-9D8F-CFDEC6D46AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08D7A8AF-3A75-4A81-9D8F-CFDEC6D46AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08D7A8AF-3A75-4A81-9D8F-CFDEC6D46AFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D1ED436-F77E-44B1-AFD7-AD6F3E898894}
+	EndGlobalSection
+EndGlobal
