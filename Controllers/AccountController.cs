@@ -15,7 +15,7 @@ namespace Okta_OAuth_Config_Proj.Controllers
 
             
 
-            returnUrl = "/"; //"https://localhost:44320"
+            returnUrl = "/Home/Index"; //"https://localhost:44320"
 
             var authnticationProperties = new LoginAuthenticationPropertiesBuilder()
             // Indicate here where Auth0 should redirect the user after a login.
