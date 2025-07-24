@@ -18,5 +18,41 @@ html {
 }
 
 body {
+  background: url('/images/Okta_bckg.jpg') no-repeat center center fixed;
+  background-size: cover;
   margin-bottom: 60px;
+}
+
+header {
+  background: rgba(245, 245, 245, 0.95); /* Light gray with slight transparency */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+header .navbar {
+  background: transparent !important;
+}
+
+header .navbar-brand, header .nav-link, header .btn {
+  color: #222 !important;
+}
+
+header .btn-primary {
+  background-color: #2563eb;
+  border-color: #1d4ed8;
+  color: #fff !important;
+}
+
+header .btn-danger {
+  background-color: #dc2626;
+  border-color: #b91c1c;
+  color: #fff !important;
+}
+
+.user-profile {
+  background: rgba(255, 255, 255, 0.85); /* White with slight transparency */
+  padding: 32px 24px;
+  border-radius: 16px;
+  max-width: 400px;
+  margin: 40px auto;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
 }
