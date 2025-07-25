@@ -1,0 +1,26 @@
+@model Okta_OAuth_SSO_Config_Proj_master.Models.UserProfile
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<h2 class="text-center">User Profile</h2>
+<div class="user-profile" style="max-width:600px;margin:40px auto;">
+    <div style="display:flex;justify-content:center;align-items:center;margin-bottom:24px;">
+        <img src="@Model.ProfileImageUrl" alt="Profile Image" style="width:140px;height:140px;border-radius:50%;object-fit:cover;box-shadow:0 2px 12px rgba(0,0,0,0.10);" />
+    </div>
+    <div style="display:flex;gap:32px;">
+        <div style="flex:1;">
+            <dl>
+                <dt>Name:</dt>
+                <dd>@Model.Name</dd>
+            </dl>
+        </div>
+        <div style="flex:1;">
+            <dl>
+                <dt>Email:</dt>
+                <dd>@Model.Email</dd>
+            </dl>
+        </div>
+    </div>
+</div> 

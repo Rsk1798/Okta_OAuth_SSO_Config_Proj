@@ -1,8 +1,17 @@
-﻿﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http
 
 @{
     ViewData["Title"] = "Home Page";
+    var givenName = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname")?.Value;
+    var surname = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname")?.Value;
+    var fullName = ((givenName ?? "") + " " + (surname ?? "")).Trim();
+    var nameClaim = User.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
+    var emailClaim = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")?.Value;
+    var displayName = !string.IsNullOrWhiteSpace(fullName) ? fullName
+                    : !string.IsNullOrWhiteSpace(nameClaim) ? nameClaim
+                    : emailClaim ?? User.Identity.Name;
 }
+
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -29,3 +38,4 @@
         </div>
     @* <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
 </div>
+

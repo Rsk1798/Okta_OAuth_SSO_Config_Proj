@@ -38,7 +38,7 @@ builder.Services.AddAuth0WebAppAuthentication(options =>
 {
     options.Domain = builder.Configuration["Auth0:Domain"];
     options.ClientId = builder.Configuration["Auth0:ClientId"];
-    options.Scope = "openid profile scope1 scope2";
+    options.Scope = "openid profile email scope1 scope2";
 });
 
 

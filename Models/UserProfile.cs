@@ -1,4 +1,3 @@
-﻿using System.Security.Principal;
 
 namespace Okta_OAuth_Config_Proj.Models
 {
@@ -17,6 +16,7 @@ namespace Okta_OAuth_Config_Proj.Models
         
         // public string name { get; set; }
        
+
         public string nickname { get; set; }
         public string picture { get; set; }
         public string updated_at { get; set; }
@@ -28,7 +28,6 @@ namespace Okta_OAuth_Config_Proj.Models
         public string last_login { get; set; }
         public int logins_count { get; set; }
     }
-
 
     public class Identity
     {
@@ -45,13 +44,9 @@ namespace Okta_OAuth_Config_Proj.Models
     }
 
 
-
     public class AppMetadata
     {
         public string App_screen_prefrence { get; set; }
         public bool privacy_policies { get; set; }
         public long privacy_policies_timestamp { get; set; }
     }
-
-
-}
