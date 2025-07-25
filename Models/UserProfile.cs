@@ -1,22 +1,22 @@
-using System;
-using System.Collections.Generic;
 
-namespace Okta_OAuth_SSO_Config_Proj_master.Models
+namespace Okta_OAuth_Config_Proj.Models
 {
     public class UserProfile
     {
+
         public string Name { get; set; }
         public string Email { get; set; }
-        public string ProfileImageUrl { get; set; }
-    }
-
-    public class Auth0UserInfo
-    {
-        public string created_at { get; set; }
-        public string email { get; set; }
+        
+       
+        // public string email { get; set; }
+        
         public bool email_verified { get; set; }
+        public string created_at { get; set; }
         public List<Identity> identities { get; set; }
-        public string name { get; set; }
+        
+        // public string name { get; set; }
+       
+
         public string nickname { get; set; }
         public string picture { get; set; }
         public string updated_at { get; set; }
@@ -37,10 +37,12 @@ namespace Okta_OAuth_SSO_Config_Proj_master.Models
         public bool isSocial { get; set; }
     }
 
+
     public class UserMetadata
     {
         public string user_mobile { get; set; }
     }
+
 
     public class AppMetadata
     {
@@ -48,4 +50,3 @@ namespace Okta_OAuth_SSO_Config_Proj_master.Models
         public bool privacy_policies { get; set; }
         public long privacy_policies_timestamp { get; set; }
     }
-} 
