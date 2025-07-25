@@ -22,7 +22,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="MyPrivacy">Privacy Concern</a>
+                            </li>
+
+                        }
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         @if(User.Identity.IsAuthenticated)
