@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using Okta_OAuth_SSO_Config_Proj_master.Models;
+using Okta_OAuth_Config_Proj.Models;
 
 namespace Okta_OAuth_Config_Proj.Controllers
 {
@@ -49,7 +49,7 @@ namespace Okta_OAuth_Config_Proj.Controllers
         public IActionResult Profile()
         {
 
-            var userProfile = new Okta_OAuth_SSO_Config_Proj_master.Models.UserProfile
+            var userProfile = new Okta_OAuth_Config_Proj.Models.UserProfile
             {
                 Name = User.Identity.Name,
                 Email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
@@ -125,12 +125,12 @@ namespace Okta_OAuth_Config_Proj.Controllers
             return View();
         }
 
-        private readonly IConfiguration _configuration;
+        //private readonly IConfiguration _configuration;
 
-        public AccountController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        //public AccountController(IConfiguration configuration)
+        //{
+        //    _configuration = configuration;
+        //}
 
         [Authorize]
         public async Task<IActionResult> Auth0UserInfo()
@@ -169,7 +169,7 @@ namespace Okta_OAuth_Config_Proj.Controllers
             apiRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             var apiResponse = await apiClient.SendAsync(apiRequest);
             var userInfoJson = await apiResponse.Content.ReadAsStringAsync();
-            var userInfo = JsonConvert.DeserializeObject<Auth0UserInfo>(userInfoJson);
+            var userInfo = JsonConvert.DeserializeObject<UserProfile>(userInfoJson);
 
             return View(userInfo);
         }
@@ -206,7 +206,7 @@ namespace Okta_OAuth_Config_Proj.Controllers
             apiRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             var apiResponse = await apiClient.SendAsync(apiRequest);
             var userInfoJson = await apiResponse.Content.ReadAsStringAsync();
-            var userInfo = JsonConvert.DeserializeObject<Auth0UserInfo>(userInfoJson);
+            var userInfo = JsonConvert.DeserializeObject<UserProfile>(userInfoJson);
 
             bool consentGiven = userInfo.app_metadata != null && userInfo.app_metadata.privacy_policies == true;
             ViewBag.ConsentGiven = consentGiven;

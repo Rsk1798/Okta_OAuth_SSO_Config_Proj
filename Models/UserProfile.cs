@@ -6,16 +6,16 @@ namespace Okta_OAuth_Config_Proj.Models
 
         public string Name { get; set; }
         public string Email { get; set; }
-        
-       
+
+
         // public string email { get; set; }
-        
+
         public bool email_verified { get; set; }
         public string created_at { get; set; }
         public List<Identity> identities { get; set; }
-        
+
         // public string name { get; set; }
-       
+
 
         public string nickname { get; set; }
         public string picture { get; set; }
@@ -27,6 +27,7 @@ namespace Okta_OAuth_Config_Proj.Models
         public string last_ip { get; set; }
         public string last_login { get; set; }
         public int logins_count { get; set; }
+        public string ProfileImageUrl { get; set; }
     }
 
     public class Identity
@@ -50,3 +51,4 @@ namespace Okta_OAuth_Config_Proj.Models
         public bool privacy_policies { get; set; }
         public long privacy_policies_timestamp { get; set; }
     }
+}
