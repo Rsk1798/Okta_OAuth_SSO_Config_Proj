@@ -78,14 +78,14 @@ namespace Okta_OAuth_Config_Proj.Controllers
         public async Task<IActionResult> Auth0UserInfo()
         {
             // Print all claims to the console for debugging
-            foreach (var claim in User.Claims)
-            {
-                Console.WriteLine($"CLAIM TYPE: {claim.Type} | VALUE: {claim.Value}");
-            }
-            var domain = _configuration["Auth0:Domain"];
-            var clientId = _configuration["Auth0:ClientId"];
-            var clientSecret = _configuration["Auth0:ClientSecret"];
-            var audience = _configuration["Auth0:Audience"];
+            //foreach (var claim in User.Claims)
+            //{
+            //    Console.WriteLine($"CLAIM TYPE: {claim.Type} | VALUE: {claim.Value}");
+            //}
+            var domain = _configuration["Auth0API:Domain"];
+            var clientId = _configuration["Auth0API:ClientId"];
+            var clientSecret = _configuration["Auth0API:ClientSecret"];
+            var audience = _configuration["Auth0API:Audience"];
 
             // 1. Get Management API token
             var tokenClient = new HttpClient();
@@ -114,6 +114,45 @@ namespace Okta_OAuth_Config_Proj.Controllers
             var userInfo = JsonConvert.DeserializeObject<Auth0UserInfo>(userInfoJson);
 
             return View(userInfo);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyPrivacy()
+        {
+            var domain = _configuration["Auth0API:Domain"];
+            var clientId = _configuration["Auth0API:ClientId"];
+            var clientSecret = _configuration["Auth0API:ClientSecret"];
+            var audience = _configuration["Auth0API:Audience"];
+
+            // 1. Get Management API token
+            var tokenClient = new HttpClient();
+            var tokenRequest = new HttpRequestMessage(HttpMethod.Post, $"https://{domain}/oauth/token");
+            tokenRequest.Content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("grant_type", "client_credentials"),
+                new KeyValuePair<string, string>("client_id", clientId),
+                new KeyValuePair<string, string>("client_secret", clientSecret),
+                new KeyValuePair<string, string>("audience", audience)
+            });
+            var tokenResponse = await tokenClient.SendAsync(tokenRequest);
+            var tokenJson = await tokenResponse.Content.ReadAsStringAsync();
+            var tokenObj = JsonConvert.DeserializeObject<dynamic>(tokenJson);
+            string accessToken = tokenObj.access_token;
+
+            // 2. Get current user's Auth0 user_id from claims
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+
+            // 3. Call Auth0 Management API for user info
+            var apiClient = new HttpClient();
+            var apiRequest = new HttpRequestMessage(HttpMethod.Get, $"https://{domain}/api/v2/users/{userId}");
+            apiRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var apiResponse = await apiClient.SendAsync(apiRequest);
+            var userInfoJson = await apiResponse.Content.ReadAsStringAsync();
+            var userInfo = JsonConvert.DeserializeObject<Auth0UserInfo>(userInfoJson);
+
+            bool consentGiven = userInfo.app_metadata != null && userInfo.app_metadata.privacy_policies == true;
+            ViewBag.ConsentGiven = consentGiven;
+            return View("~/Views/Home/Privacy.cshtml");
         }
     }
 }
